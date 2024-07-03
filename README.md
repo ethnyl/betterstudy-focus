@@ -2,6 +2,9 @@
 
 A simple focus tool in React. Part of my betterstudy project, which plans to be fully implemented soonTM
 
+![image](https://github.com/ethnyl/betterstudy-focus/assets/72218235/fd4dc021-824d-48db-a4a7-37483b48dc7c)
+
+
 ##  Features
 - Minimal UI
   - I wanted this app to be as barebones as possible to prioritize real focus
