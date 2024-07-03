@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.b50cc12c.css",
-    "main.js": "/static/js/main.b35cc1b7.js",
-    "index.html": "/index.html",
-    "main.b50cc12c.css.map": "/static/css/main.b50cc12c.css.map",
-    "main.b35cc1b7.js.map": "/static/js/main.b35cc1b7.js.map"
+    "main.css": "/betterstudy-focus/static/css/main.b50cc12c.css",
+    "main.js": "/betterstudy-focus/static/js/main.a80c29c2.js",
+    "index.html": "/betterstudy-focus/index.html",
+    "main.b50cc12c.css.map": "/betterstudy-focus/static/css/main.b50cc12c.css.map",
+    "main.a80c29c2.js.map": "/betterstudy-focus/static/js/main.a80c29c2.js.map"
   },
   "entrypoints": [
     "static/css/main.b50cc12c.css",
-    "static/js/main.b35cc1b7.js"
+    "static/js/main.a80c29c2.js"
   ]
 }
