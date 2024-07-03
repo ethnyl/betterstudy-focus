@@ -1,6 +1,7 @@
 {
   "name": "betterstudy-focus",
   "version": "0.1.0",
+  "homepage": "https://ethnyl.github.io/betterstudy-focus/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
