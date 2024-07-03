@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import Sidebar from './components/Sidebar';
 import WidgetContainer from './components/WidgetContainer';
+import DarkMode from './components/DarkMode';
 
 const AppContainer = styled.div`
   display: flex;
@@ -9,6 +10,16 @@ const AppContainer = styled.div`
   font-family: Arial, sans-serif;
   position: relative;
   overflow: hidden;
+  color: ${props => props.theme.textColor};
+`;
+
+const BackgroundContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 `;
 
 const BackgroundVideo = styled.video`
@@ -20,7 +31,6 @@ const BackgroundVideo = styled.video`
   width: auto;
   height: auto;
   transform: translateX(-50%) translateY(-50%);
-  z-index: -1;
 `;
 
 const YouTubeBackground = styled.iframe`
@@ -33,12 +43,55 @@ const YouTubeBackground = styled.iframe`
   height: auto;
   transform: translateX(-50%) translateY(-50%);
   pointer-events: none;
-  z-index: -1;
 `;
+
+const ColorBackground = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: ${props => props.color};
+`;
+
+const ContentContainer = styled.div`
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: ${props => props.theme.backgroundColor}aa;
+`;
+
+const lightTheme = {
+  backgroundColor: '#ffffff',
+  textColor: '#000000',
+  sidebarBackground: '#f1f1f1',
+  widgetBackground: 'rgba(255, 255, 255, 0.8)',
+  inputBackground: '#ffffff',
+  buttonBackground: '#3498db',
+  buttonHoverBackground: '#2980b9',
+  cardBackground: '#f0f0f0',
+};
+
+const darkTheme = {
+  backgroundColor: '#282c34',
+  textColor: '#ffffff',
+  sidebarBackground: '#1a1a1a',
+  widgetBackground: 'rgba(40, 44, 52, 0.8)',
+  inputBackground: '#333333',
+  buttonBackground: '#2980b9',
+  buttonHoverBackground: '#3498db',
+  cardBackground: '#444444',
+};
 
 function App() {
   const [widgets, setWidgets] = useState([]);
   const [background, setBackground] = useState('');
+  const [isDark, setIsDark] = useState(true);
+
+  const toggleDarkMode = () => {
+    setIsDark(!isDark);
+  };
 
   const addWidget = (type) => {
     setWidgets([...widgets, { type, id: Date.now() }]);
@@ -49,7 +102,6 @@ function App() {
   };
 
   useEffect(() => {
-    // Load YouTube API
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     const firstScriptTag = document.getElementsByTagName('script')[0];
@@ -75,20 +127,30 @@ function App() {
           <source src={videoUrl} type="video/mp4" />
         </BackgroundVideo>
       );
+    } else if (background.startsWith('color:')) {
+      const color = background.split(':')[1];
+      return <ColorBackground color={color} />;
     }
     return null;
   };
 
   return (
-    <AppContainer>
-      {renderBackground()}
-      <Sidebar addWidget={addWidget} />
-      <WidgetContainer 
-        widgets={widgets} 
-        removeWidget={removeWidget} 
-        setBackground={setBackground}
-      />
-    </AppContainer>
+    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+      <AppContainer>
+        <BackgroundContainer>
+          {renderBackground()}
+        </BackgroundContainer>
+        <ContentContainer>
+          <Sidebar addWidget={addWidget} isDark={isDark} toggleDarkMode={toggleDarkMode} />
+          <WidgetContainer 
+            widgets={widgets} 
+            removeWidget={removeWidget} 
+            setBackground={setBackground}
+          />
+          <DarkMode isDark={isDark} toggleDarkMode={toggleDarkMode} />
+        </ContentContainer>
+      </AppContainer>
+    </ThemeProvider>
   );
 }
 

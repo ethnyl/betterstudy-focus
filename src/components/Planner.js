@@ -5,12 +5,14 @@ const TaskInput = styled.input`
   width: 100%;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid ${props => props.theme.textColor};
   border-radius: 4px;
+  background-color: ${props => props.theme.inputBackground};
+  color: ${props => props.theme.textColor};
 `;
 
 const TaskButton = styled.button`
-  background-color: #3498db;
+  background-color: ${props => props.theme.buttonBackground};
   color: white;
   border: none;
   padding: 0.5rem;
@@ -20,7 +22,7 @@ const TaskButton = styled.button`
   width: 100%;
 
   &:hover {
-    background-color: #2980b9;
+    background-color: ${props => props.theme.buttonHoverBackground};
   }
 `;
 
@@ -32,7 +34,8 @@ const TaskList = styled.ul`
 `;
 
 const TaskItem = styled.li`
-  background-color: #f0f0f0;
+  background-color: ${props => props.theme.cardBackground};
+  color: ${props => props.theme.textColor};
   padding: 0.5rem;
   margin-bottom: 0.5rem;
   border-radius: 4px;

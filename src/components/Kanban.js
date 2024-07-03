@@ -5,6 +5,7 @@ const KanbanContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  color: ${props => props.theme.textColor};
 `;
 
 const ColumnsContainer = styled.div`
@@ -15,7 +16,7 @@ const ColumnsContainer = styled.div`
 
 const Column = styled.div`
   min-width: 200px;
-  background-color: #f1f1f1;
+  background-color: ${props => props.theme.cardBackground};
   border-radius: 5px;
   padding: 10px;
   margin-right: 10px;
@@ -31,7 +32,8 @@ const ColumnTitle = styled.h3`
 `;
 
 const Card = styled.div`
-  background-color: white;
+  background-color: ${props => props.theme.backgroundColor};
+  color: ${props => props.theme.textColor};
   border-radius: 3px;
   padding: 10px;
   margin-bottom: 10px;
@@ -39,22 +41,29 @@ const Card = styled.div`
 
 const Button = styled.button`
   padding: 5px;
-  background-color: #4CAF50;
+  background-color: ${props => props.theme.buttonBackground};
   color: white;
   border: none;
   border-radius: 3px;
   cursor: pointer;
   margin: 2px;
+
+  &:hover {
+    background-color: ${props => props.theme.buttonHoverBackground};
+  }
 `;
 
 const Input = styled.input`
   width: 100%;
   padding: 5px;
   margin-bottom: 5px;
+  background-color: ${props => props.theme.inputBackground};
+  color: ${props => props.theme.textColor};
+  border: 1px solid ${props => props.theme.textColor};
 `;
 
 const ControlPanel = styled.div`
-  background-color: #f1f1f1;
+  background-color: ${props => props.theme.cardBackground};
   padding: 10px;
   margin-bottom: 10px;
 `;

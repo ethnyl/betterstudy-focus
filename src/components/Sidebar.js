@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FaChevronLeft, FaChevronRight, FaTree, FaMusic, FaClock, FaTasks, FaStickyNote, FaColumns, FaCalendarAlt } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight, FaTree, FaMusic, FaClock, FaTasks, FaStickyNote, FaColumns, FaCalendarAlt, FaMoon, FaSun } from 'react-icons/fa';
 
 const SidebarContainer = styled.div`
-  background-color: #2c3e50;
-  color: white;
+  background-color: ${props => props.theme.sidebarBackground};
+  color: ${props => props.theme.textColor};
   width: ${props => props.isOpen ? '200px' : '50px'};
   transition: width 0.3s ease;
 `;
@@ -13,7 +13,7 @@ const ToggleButton = styled.button`
   width: 100%;
   background: none;
   border: none;
-  color: white;
+  color: ${props => props.theme.textColor};
   padding: 10px;
   cursor: pointer;
 `;
@@ -22,7 +22,7 @@ const IconButton = styled.button`
   width: 100%;
   background: none;
   border: none;
-  color: white;
+  color: ${props => props.theme.textColor};
   padding: 10px;
   cursor: pointer;
   display: flex;
@@ -35,7 +35,7 @@ const IconButton = styled.button`
   }
 `;
 
-function Sidebar({ addWidget }) {
+function Sidebar({ addWidget, isDark, toggleDarkMode }) {
     const [isOpen, setIsOpen] = useState(false);
   
     return (
@@ -70,6 +70,10 @@ function Sidebar({ addWidget }) {
         <IconButton isOpen={isOpen} onClick={() => addWidget('calendar')}>
           <FaCalendarAlt />
           <span>Calendar</span>
+        </IconButton>
+        <IconButton isOpen={isOpen} onClick={toggleDarkMode}>
+          {isDark ? <FaSun /> : <FaMoon />}
+          <span>{isDark ? 'Light Mode' : 'Dark Mode'}</span>
         </IconButton>
       </SidebarContainer>
     );
