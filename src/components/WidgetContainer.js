@@ -56,19 +56,19 @@ function WidgetContainer({ widgets, removeWidget, setBackground }) {
 
   const renderWidget = (widget) => {
     switch (widget.type) {
-      case 'environment':
+      case 'Environment':
         return <VirtualEnvironment setBackground={setBackground} />;
-      case 'audio':
+      case 'Audio':
         return <AudioControl />;
-      case 'timer':
+      case 'Timer':
         return <Timer />;
-      case 'planner':
+      case 'Planner':
         return <Planner />;
-      case 'stickynote':
+      case 'Sticky Note':
         return <StickyNote />;
-      case 'kanban':
+      case 'Kanban':
         return <Kanban />;
-      case 'calendar':
+      case 'Calendar':
         return <Calendar />;
       default:
         return null;
