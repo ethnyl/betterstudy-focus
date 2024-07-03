@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import Sidebar from './components/Sidebar';
 import WidgetContainer from './components/WidgetContainer';
 import DarkMode from './components/DarkMode';
 
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+`;
+
 const AppContainer = styled.div`
   display: flex;
   height: 100vh;
+  width: 100vw;
   font-family: Arial, sans-serif;
   position: relative;
   overflow: hidden;
@@ -43,6 +52,7 @@ const YouTubeBackground = styled.iframe`
   height: auto;
   transform: translateX(-50%) translateY(-50%);
   pointer-events: none;
+  border: none;
 `;
 
 const ColorBackground = styled.div`
@@ -84,6 +94,7 @@ const darkTheme = {
   cardBackground: '#444444',
 };
 
+
 function App() {
   const [widgets, setWidgets] = useState([]);
   const [background, setBackground] = useState('');
@@ -108,12 +119,17 @@ function App() {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   }, []);
 
+  useEffect(() => {
+    const forestVideoId = 'x7SQaDTSrVg';
+    setBackground(`youtube:${forestVideoId}`);
+  }, []);
+
   const renderBackground = () => {
     if (background.startsWith('youtube:')) {
       const videoId = background.split(':')[1];
       return (
         <YouTubeBackground
-          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=${videoId}`}
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=${videoId}&modestbranding=1&iv_load_policy=3&enablejsapi=1&origin=${window.location.origin}`}
           frameBorder="0"
           allow="autoplay; encrypted-media"
           allowFullScreen
